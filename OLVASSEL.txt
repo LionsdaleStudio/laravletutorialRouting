@@ -1,0 +1,41 @@
+1, Projekt létrehozása
+	a, laravel new ProjektNeve ----> csak akkor ha sikerült a composer global require laravel/installer
+	b, composer create-project laravel/laravel ProjektNeve
+
+2, Ha adatbázissal dolgozol akkor:
+	- Mindig model-t csinálunk először:
+		- php artisan make:model ModellNeveEgyesSzamNagybetű --all
+	(Megcsinálja: Modelt, Controllert, Requesteket, Migration, Seeder, Factoryt
+3, Ha megvan a modell
+	- web.php (itt vannak az útvonalak)
+
+	Route::resource('/ModellNeveTöbbes', ModellneveController::class);
+
+	--->Ha véletlen nem működik: php artisan optimize ((((gyorsítótár törlése)
+
+4, SORREND (ajánlott)
+	- Migrationsben a tábla létrehozása
+	- Factory (ha kell random adat)
+	- Seeder (ha factory vagy fix alapján kell feltöltés) -> Seedernél a DatabaseSeederben kell meghívni a 	dolgokat és a saját nevű seederbe megírni, hogy mit csináljon.
+
+5, Adatbázis frissítése
+	- php artisan migration:fresh --seed (frissíti az adatbázist, és feltölti a seeder beállításai alapján
+
+6. Auth rendszer
+	- composer require laravel/ui
+7. Importálás
+	- php artisan ui bootstrap --auth
+
+8. Saját projekt letöltése gitről
+
+	- Letöltöd kicsomagolod megnyitod VISUAL STUDIOBAN
+	- Composer.json megnyit és install (ha nincs ott a gomb, akkor composer install parancs a terminálban)
+	
+	- npm install (node modules telepítése)
+
+9. Szerver indítás
+	- t1	php artisan serve
+	- t2	npm run dev
+10. Nálad nincs meg az adatbázisunk, szóval csak indítsd el a xamppet, és írd be hogy php artisan migrate:fresh --seed
+
+
