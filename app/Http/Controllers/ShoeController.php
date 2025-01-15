@@ -15,7 +15,7 @@ class ShoeController extends Controller
     {
         // Database query builder a dokumentációban
         // Eloquent menü
-        $shoes = Shoe::all()->where("quantity", "<", 5);
+        $shoes = Shoe::all();
         return view("shoes.index", ["shoes" => $shoes]);
     }
 
@@ -32,7 +32,29 @@ class ShoeController extends Controller
      */
     public function store(StoreShoeRequest $request)
     {
-        dd($request);
+        //Shoe::create($request->all());
+
+        //Személyre szabhatóbb mentés
+
+        $limited = ($request->limited == "true" ) ? 1 : 0;
+
+        $newShoe = Shoe::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'limited' => $limited,
+
+        ]);
+
+        /* $newShoe->save(); */
+
+        /* Visszairányít oda, ahonnan jöttél */
+        return back()->with("success", "{$newShoe->name} was created.");
+
+        /* Máshova irányt vissza */
+        //return redirect("shoes.index");
+
+
     }
 
     /**
@@ -48,7 +70,7 @@ class ShoeController extends Controller
      */
     public function edit(Shoe $shoe)
     {
-        //
+        return view("shoes.edit", ["shoe" => $shoe]);
     }
 
     /**
@@ -56,7 +78,14 @@ class ShoeController extends Controller
      */
     public function update(UpdateShoeRequest $request, Shoe $shoe)
     {
-        //
+        /* Ami a kéréssel jön az frissül. */
+        $shoe->update($request->all());
+
+        //Manuálisan megadom hogy mi frissüljön mire.
+        /* $shoe->name = "Valami";
+        $shoe->update(); */
+
+        return redirect(route("shoes.index"))->with("success", "Shoe edited successfully.");
     }
 
     /**
@@ -64,7 +93,9 @@ class ShoeController extends Controller
      */
     public function destroy(Shoe $shoe)
     {
-        //
+        $shoe->delete();
+        return redirect(route("shoes.index"))->with("success", "Shoe deleted successfully.");
+
     }
 
     public function review()
