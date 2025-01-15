@@ -13,6 +13,8 @@ class ShoeController extends Controller
      */
     public function index()
     {
+        // Database query builder a dokumentációban
+        // Eloquent menü
         $shoes = Shoe::all()->where("quantity", "<", 5);
         return view("shoes.index", ["shoes" => $shoes]);
     }
@@ -22,7 +24,7 @@ class ShoeController extends Controller
      */
     public function create()
     {
-        return "Ez majd egy FORM-ot mutató oldal, cipő létrehozására.";
+        return view("shoes.create");
     }
 
     /**
@@ -30,7 +32,7 @@ class ShoeController extends Controller
      */
     public function store(StoreShoeRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**
