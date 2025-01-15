@@ -43,7 +43,6 @@ class ShoeController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
             'limited' => $limited,
-
         ]);
 
         /* $newShoe->save(); */
@@ -52,7 +51,7 @@ class ShoeController extends Controller
         return back()->with("success", "{$newShoe->name} was created.");
 
         /* Máshova irányt vissza */
-        //return redirect("shoes.index");
+        //return redirect(route("shoes.index"));
 
 
     }
@@ -62,7 +61,7 @@ class ShoeController extends Controller
      */
     public function show(Shoe $shoe)
     {
-        //
+        return view("shoes.show", ["shoe" => $shoe]);
     }
 
     /**

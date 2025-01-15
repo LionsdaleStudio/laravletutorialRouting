@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My first Shoe Webshop with Laravel</title>
 
+    
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -24,7 +26,12 @@
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                        Offcanvas
+                        @auth
+                        {{auth()->user()->name}}
+                        @else
+                        Hello, Friend.
+                        @endauth
+                        
                     </h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
@@ -37,6 +44,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
+                        @auth
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -45,6 +53,7 @@
                                 <a class="dropdown-item" href="#">Action 2</a>
                             </div>
                         </li>
+                        @endauth
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

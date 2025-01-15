@@ -19,14 +19,14 @@
     {{-- SUCCESS KEZELÉS VÉGE --}}
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-center">
             <thead>
-                <tr>
+                <tr >
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Limited</th>
-                    <th scope="col" colspan="2">Actions</th>
+                    <th scope="col" colspan="3">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +48,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ route('shoes.show', $item->id) }}" method="GET">
+                                @csrf
+                                <button class="btn btn-info">Show</button>
                             </form>
                         </td>
                     </tr>

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->boolean("limited")->default(false);
             $table->timestamps(); //Created_at, Updated_at
             $table->softDeletes();
+            $table->foreignId("created_by")->nullable()->references("id")->on("users");
+            $table->foreignId("updated_by")->nullable()->references("id")->on("users");
+            $table->foreignId("deleted_by")->nullable()->references("id")->on("users");
         });
     }
 
