@@ -6,13 +6,16 @@ use App\Models\Shoe;
 
 class ShoeObserver
 {
-      /**
+    /**
      * Handle the Shoe "created" event.
      */
     public function creating(Shoe $shoe)
     {
-        $shoe->created_by = auth()->user()->id;
-        $shoe->save();
+        if (auth()->guest() == false) {
+            $shoe->created_by = auth()->user()->id;
+            $shoe->save();
+        }
+
     }
 
     /**
@@ -20,8 +23,11 @@ class ShoeObserver
      */
     public function updating(Shoe $shoe)
     {
-        $shoe->updated_by = auth()->user()->id;
-        $shoe->save();
+        if (auth()->guest() == false) {
+            $shoe->updated_by = auth()->user()->id;
+            $shoe->save();
+        }
+
     }
 
     /**

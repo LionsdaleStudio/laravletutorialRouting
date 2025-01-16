@@ -97,8 +97,9 @@ class ShoeController extends Controller
 
     }
 
-    public function review()
+    public function review(Shoe $shoe)
     {
-        return "I make reviews here";
+        $reviews = $shoe->reviews;
+        return view("shoes.show", ["shoe" => $shoe, "reviews" => $reviews]);
     }
 }
